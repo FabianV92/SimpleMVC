@@ -1,4 +1,4 @@
-package de.silverdawn;
+package de.silverdawn.model;
 
 public class Person {
     private String _name;

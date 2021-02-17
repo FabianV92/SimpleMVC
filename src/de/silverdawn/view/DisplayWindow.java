@@ -1,10 +1,11 @@
-package de.silverdawn;
+package de.silverdawn.view;
+
+import de.silverdawn.model.Datamodel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
-public class Main extends JFrame {
+public class DisplayWindow extends JFrame {
 
     private JMenu _fileMenu;
     private JMenuBar _menuBar;
@@ -15,12 +16,12 @@ public class Main extends JFrame {
     private JButton _forwardButton;
     private JButton _backButton;
 
-    private Datamodel _data = new Datamodel();
-
+    private Datamodel _data;
     private int _index = 0;
 
-    public Main(){
+    public DisplayWindow(){
 
+        _data = new Datamodel();
         _menuBar = new JMenuBar();
         _fileMenu = new JMenu("File");
         _newMenuItem = new JMenuItem("New");
@@ -61,7 +62,8 @@ public class Main extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Main();
+        Textausgabe.printData();
+        new DisplayWindow();
     }
 
 }

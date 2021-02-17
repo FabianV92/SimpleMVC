@@ -1,4 +1,4 @@
-package de.silverdawn;
+package de.silverdawn.model;
 
 import java.util.ArrayList;
 
