@@ -7,8 +7,7 @@ public class Textausgabe {
 
     public static void printData() {
 
-        Datamodel d = new Datamodel();
-        for (Person p: d.get_data()) {
+        for (Person p: Datamodel.getInstance().get_data()) {
             System.out.println(p.toString());
         }
 

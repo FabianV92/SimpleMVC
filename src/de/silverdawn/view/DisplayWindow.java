@@ -1,5 +1,8 @@
 package de.silverdawn.view;
 
+import de.silverdawn.controller.BackButtonController;
+import de.silverdawn.controller.ExitMenuController;
+import de.silverdawn.controller.ForwardButtonController;
 import de.silverdawn.model.Datamodel;
 
 import javax.swing.*;
@@ -16,25 +19,20 @@ public class DisplayWindow extends JFrame {
     private JButton _forwardButton;
     private JButton _backButton;
 
-    private Datamodel _data;
     private int _index = 0;
+
+    public int get_index() {
+        return _index;
+    }
+
+    public void set_index(int _index) {
+        this._index = _index;
+    }
 
     public DisplayWindow(){
 
-        _data = new Datamodel();
         setupMenuBar();
         setupDisplay();
-
-        _exitMenuItem.addActionListener((a) -> System.exit(0));
-        _backButton.addActionListener((a) -> {
-            _index--;
-            _nameDisplayLabel.setText(_data.get_data().get(_index).toString());
-        });
-        _forwardButton.addActionListener((a) -> {
-            _index++;
-            _nameDisplayLabel.setText(_data.get_data().get(_index).toString());
-        });
-
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Simple MVC App");
         this.setJMenuBar(_menuBar);
@@ -48,8 +46,10 @@ public class DisplayWindow extends JFrame {
 
     private void setupDisplay() {
         _forwardButton = new JButton("Next");
+        _forwardButton.addActionListener(new ForwardButtonController(this));
         _backButton = new JButton("Previous");
-        _nameDisplayLabel = new JLabel(_data.get_data().get(_index).toString());
+        _backButton.addActionListener(new BackButtonController(this));
+        _nameDisplayLabel = new JLabel(Datamodel.getInstance().get_data().get(_index).toString());
         _nameDisplayLabel.setPreferredSize(new Dimension(150,32));
         _dataDisplayPanel = new JPanel();
         _dataDisplayPanel.setLayout(new FlowLayout());
@@ -67,6 +67,11 @@ public class DisplayWindow extends JFrame {
         _fileMenu.add(_newMenuItem);
         _fileMenu.add(_exitMenuItem);
         _menuBar.add(_fileMenu);
+        _exitMenuItem.addActionListener(new ExitMenuController());
+    }
+
+    public void setDisplayLabelText(String text){
+        _nameDisplayLabel.setText(text);
     }
 
     public static void main(String[] args) {
