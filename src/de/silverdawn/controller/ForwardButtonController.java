@@ -10,7 +10,6 @@ public class ForwardButtonController implements ActionListener
 {
     DisplayWindow _displayWindow;
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(_displayWindow.get_index() < Datamodel.getInstance().get_data().size() - 1){
