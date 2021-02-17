@@ -2,6 +2,7 @@ package de.silverdawn;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Main extends JFrame {
 
@@ -14,17 +15,23 @@ public class Main extends JFrame {
     private JButton _forwardButton;
     private JButton _backButton;
 
-    private String[] _data = {"Alf, 19 Jahre","Bert, 22 Jahre","Cedric, 20 Jahre","Dörte, 18 Jahre"};
+    private ArrayList<Person> _data = new ArrayList<>();
+
     private int _index = 0;
 
     public Main(){
+
+        _data.add(new Person("Alf",19));
+        _data.add(new Person("Bert",22));
+        _data.add(new Person("Cedric",20));
+        _data.add(new Person("Dörte",18));
         _menuBar = new JMenuBar();
         _fileMenu = new JMenu("File");
         _newMenuItem = new JMenuItem("New");
         _exitMenuItem = new JMenuItem("Exit");
         _forwardButton = new JButton("Next");
         _backButton = new JButton("Previous");
-        _nameDisplayLabel = new JLabel(_data[_index]);
+        _nameDisplayLabel = new JLabel(_data.get(_index).toString());
         _nameDisplayLabel.setPreferredSize(new Dimension(150,32));
         _dataDisplayPanel = new JPanel();
         _dataDisplayPanel.setLayout(new FlowLayout());
@@ -36,11 +43,11 @@ public class Main extends JFrame {
         _exitMenuItem.addActionListener((a) -> System.exit(0));
         _backButton.addActionListener((a) -> {
             _index--;
-            _nameDisplayLabel.setText(_data[_index]);
+            _nameDisplayLabel.setText(_data.get(_index).toString());
         });
         _forwardButton.addActionListener((a) -> {
             _index++;
-            _nameDisplayLabel.setText(_data[_index]);
+            _nameDisplayLabel.setText(_data.get(_index).toString());
         });
 
         _fileMenu.add(_newMenuItem);
