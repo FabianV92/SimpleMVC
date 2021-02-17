@@ -11,7 +11,9 @@ public class BackButtonController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        _displayWindow.set_index(_displayWindow.get_index() - 1);
+        if(_displayWindow.get_index() > 0) {
+            _displayWindow.set_index(_displayWindow.get_index() - 1);
+        }
         _displayWindow.setDisplayLabelText(Datamodel.getInstance()
                 .getObjectAtIndex(_displayWindow.get_index()).toString());
     }

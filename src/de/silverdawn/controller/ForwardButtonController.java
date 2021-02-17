@@ -13,7 +13,9 @@ public class ForwardButtonController implements ActionListener
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        _displayWindow.set_index(_displayWindow.get_index() + 1);
+        if(_displayWindow.get_index() < Datamodel.getInstance().get_data().size() - 1){
+            _displayWindow.set_index(_displayWindow.get_index() + 1);
+        }
         _displayWindow.setDisplayLabelText(Datamodel.getInstance()
                 .getObjectAtIndex(_displayWindow.get_index()).toString());
     }
