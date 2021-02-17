@@ -22,20 +22,8 @@ public class DisplayWindow extends JFrame {
     public DisplayWindow(){
 
         _data = new Datamodel();
-        _menuBar = new JMenuBar();
-        _fileMenu = new JMenu("File");
-        _newMenuItem = new JMenuItem("New");
-        _exitMenuItem = new JMenuItem("Exit");
-        _forwardButton = new JButton("Next");
-        _backButton = new JButton("Previous");
-        _nameDisplayLabel = new JLabel(_data.get_data().get(_index).toString());
-        _nameDisplayLabel.setPreferredSize(new Dimension(150,32));
-        _dataDisplayPanel = new JPanel();
-        _dataDisplayPanel.setLayout(new FlowLayout());
-        _dataDisplayPanel.setPreferredSize(new Dimension(400,36));
-        _dataDisplayPanel.add(_backButton);
-        _dataDisplayPanel.add(_nameDisplayLabel);
-        _dataDisplayPanel.add(_forwardButton);
+        setupMenuBar();
+        setupDisplay();
 
         _exitMenuItem.addActionListener((a) -> System.exit(0));
         _backButton.addActionListener((a) -> {
@@ -47,9 +35,6 @@ public class DisplayWindow extends JFrame {
             _nameDisplayLabel.setText(_data.get_data().get(_index).toString());
         });
 
-        _fileMenu.add(_newMenuItem);
-        _fileMenu.add(_exitMenuItem);
-        _menuBar.add(_fileMenu);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Simple MVC App");
         this.setJMenuBar(_menuBar);
@@ -59,6 +44,29 @@ public class DisplayWindow extends JFrame {
         this.setSize(400,300);
         this.setVisible(true);
 
+    }
+
+    private void setupDisplay() {
+        _forwardButton = new JButton("Next");
+        _backButton = new JButton("Previous");
+        _nameDisplayLabel = new JLabel(_data.get_data().get(_index).toString());
+        _nameDisplayLabel.setPreferredSize(new Dimension(150,32));
+        _dataDisplayPanel = new JPanel();
+        _dataDisplayPanel.setLayout(new FlowLayout());
+        _dataDisplayPanel.setPreferredSize(new Dimension(400,36));
+        _dataDisplayPanel.add(_backButton);
+        _dataDisplayPanel.add(_nameDisplayLabel);
+        _dataDisplayPanel.add(_forwardButton);
+    }
+
+    private void setupMenuBar() {
+        _menuBar = new JMenuBar();
+        _fileMenu = new JMenu("File");
+        _newMenuItem = new JMenuItem("New");
+        _exitMenuItem = new JMenuItem("Exit");
+        _fileMenu.add(_newMenuItem);
+        _fileMenu.add(_exitMenuItem);
+        _menuBar.add(_fileMenu);
     }
 
     public static void main(String[] args) {
