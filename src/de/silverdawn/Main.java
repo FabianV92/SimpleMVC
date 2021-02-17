@@ -5,53 +5,53 @@ import java.awt.*;
 
 public class Main extends JFrame {
 
-    JMenu myFileMenu;
-    JMenuBar myMenuBar;
-    JMenuItem myNew;
-    JMenuItem myExit;
-    JPanel myDataPanel;
-    JLabel myNameDisplay;
-    JButton myForwardButton;
-    JButton myBackButton;
+    private JMenu _fileMenu;
+    private JMenuBar _menuBar;
+    private JMenuItem _newMenuItem;
+    private JMenuItem _exitMenuItem;
+    private JPanel _dataDisplayPanel;
+    private JLabel _nameDisplayLabel;
+    private JButton _forwardButton;
+    private JButton _backButton;
 
-    String[] myNames = {"Alf, 19 Jahre","Bert, 22 Jahre","Cedric, 20 Jahre","Dörte, 18 Jahre"};
-    int myIndex = 0;
+    private String[] _data = {"Alf, 19 Jahre","Bert, 22 Jahre","Cedric, 20 Jahre","Dörte, 18 Jahre"};
+    private int _index = 0;
 
     public Main(){
-        myMenuBar = new JMenuBar();
-        myFileMenu = new JMenu("File");
-        myNew = new JMenuItem("New");
-        myExit = new JMenuItem("Exit");
-        myForwardButton = new JButton("Next");
-        myBackButton = new JButton("Previous");
-        myNameDisplay = new JLabel(myNames[myIndex]);
-        myNameDisplay.setPreferredSize(new Dimension(150,32));
-        myDataPanel = new JPanel();
-        myDataPanel.setLayout(new FlowLayout());
-        myDataPanel.setPreferredSize(new Dimension(400,36));
-        myDataPanel.add(myBackButton);
-        myDataPanel.add(myNameDisplay);
-        myDataPanel.add(myForwardButton);
+        _menuBar = new JMenuBar();
+        _fileMenu = new JMenu("File");
+        _newMenuItem = new JMenuItem("New");
+        _exitMenuItem = new JMenuItem("Exit");
+        _forwardButton = new JButton("Next");
+        _backButton = new JButton("Previous");
+        _nameDisplayLabel = new JLabel(_data[_index]);
+        _nameDisplayLabel.setPreferredSize(new Dimension(150,32));
+        _dataDisplayPanel = new JPanel();
+        _dataDisplayPanel.setLayout(new FlowLayout());
+        _dataDisplayPanel.setPreferredSize(new Dimension(400,36));
+        _dataDisplayPanel.add(_backButton);
+        _dataDisplayPanel.add(_nameDisplayLabel);
+        _dataDisplayPanel.add(_forwardButton);
 
-        myExit.addActionListener((a) -> System.exit(0));
-        myBackButton.addActionListener((a) -> {
-            myIndex--;
-            myNameDisplay.setText(myNames[myIndex]);
+        _exitMenuItem.addActionListener((a) -> System.exit(0));
+        _backButton.addActionListener((a) -> {
+            _index--;
+            _nameDisplayLabel.setText(_data[_index]);
         });
-        myForwardButton.addActionListener((a) -> {
-            myIndex++;
-            myNameDisplay.setText(myNames[myIndex]);
+        _forwardButton.addActionListener((a) -> {
+            _index++;
+            _nameDisplayLabel.setText(_data[_index]);
         });
 
-        myFileMenu.add(myNew);
-        myFileMenu.add(myExit);
-        myMenuBar.add(myFileMenu);
+        _fileMenu.add(_newMenuItem);
+        _fileMenu.add(_exitMenuItem);
+        _menuBar.add(_fileMenu);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Simple MVC App");
-        this.setJMenuBar(myMenuBar);
+        this.setJMenuBar(_menuBar);
         SpringLayout mainLayout = new SpringLayout();
         this.setLayout(mainLayout);
-        this.add(myDataPanel);
+        this.add(_dataDisplayPanel);
         this.setSize(400,300);
         this.setVisible(true);
 
